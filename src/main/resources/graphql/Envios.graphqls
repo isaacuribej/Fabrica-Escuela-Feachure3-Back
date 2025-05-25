@@ -10,7 +10,7 @@ type Envios {
 
 type EstadoEnvio {
     idestado: Int!
-    nombre: String!
+    nombree: String!
 
 }
 
