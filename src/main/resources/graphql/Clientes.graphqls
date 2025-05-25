@@ -1,0 +1,27 @@
+type Clientes {
+    id_cliente: Int!
+    idTipoDocumento: TipoDocumento!  # ← Cambio aquí
+    nombre: String!
+    apellido: String!
+    numeroDocumento: String!
+    correoElectronico: String!
+    contrasenaHash: String!
+    direccion: String!
+    telefono: String!
+}
+
+type TipoDocumento {
+    idTipoDocumento: Int!
+    nombre: String!
+}
+
+input ClientesInput {
+    idTipoDocumento: Int!
+    nombre: String!
+    apellido: String!
+    numeroDocumento: String!
+    correoElectronico: String!
+    contrasenaHash: String!
+    direccion: String!
+    telefono: String!
+}

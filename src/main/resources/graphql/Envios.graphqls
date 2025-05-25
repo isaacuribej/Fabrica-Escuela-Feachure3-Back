@@ -1,0 +1,17 @@
+type Envios {
+    id_envio: Int!
+    idCliente : Clientes!
+    idEstado: EstadoEnvio!
+    numeroGuia: String!
+    direccionEnvio: String!
+    fechaCompra: String! # LocalDate → ISO string
+    precio: Float!
+}
+
+type EstadoEnvio {
+    idestado: Int!
+    nombre: String!
+
+}
+
+
