@@ -41,11 +41,11 @@ public class Envios {
     public Envios() {
     }
 
-    public Integer getId() {
+    public Integer getId_envio() {
         return id_envio;
     }
 
-    public void setId(Integer id_envio) {
+    public void setId_envio(Integer id_envio) {
         this.id_envio = id_envio;
     }
 
@@ -57,11 +57,11 @@ public class Envios {
         this.id_cliente = id_cliente;
     }
 
-    public Estadoenvio getIdEstado() {
+    public Estadoenvio getId_estado() {
         return id_estado;
     }
 
-    public void setIdEstado(Estadoenvio id_estado) {
+    public void setId_estado(Estadoenvio id_estado) {
         this.id_estado = id_estado;
     }
 

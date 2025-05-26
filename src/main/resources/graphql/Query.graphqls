@@ -9,5 +9,6 @@ type Mutation{
     insertarCliente(clientesInput: ClientesInput):Clientes!
     deleteCliente(id_cliente: ID!):Boolean!
     updateCliente(id_cliente: ID!, clientesInput: ClientesInput):Clientes!
+    uptadeEnvio(id_envio: ID!, enviosInput: EnviosInput):Envios!
 }
 
