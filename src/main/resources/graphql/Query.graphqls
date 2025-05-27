@@ -15,5 +15,8 @@ type Mutation{
     deleteCliente(id_cliente: ID!):Boolean!
     updateCliente(id_cliente: ID!, clientesInput: ClientesInput):Clientes!
     uptadeEnvio(id_envio: ID!, enviosInput: EnviosInput):Envios!
+
+    agregarComentario(id_envio: Int!, contenido: String!): Comentarios!
+
 }
 

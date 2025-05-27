@@ -4,10 +4,12 @@ package com.prueba.prueba.Comentariios;
 import com.prueba.prueba.Envios.Envios;
 import com.prueba.prueba.Envios.EnviosRepositorio;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +42,20 @@ public class ComentariosResolver {
                 .toList();
     }
 
+    @MutationMapping
+    public Comentarios agregarComentario(@Argument Integer id_envio, @Argument String contenido) {
+        // Busca el envío por id
+        Envios envio = enviosRepositorio.findById(id_envio)
+                .orElseThrow(() -> new RuntimeException("Envio no encontrado"));
 
+        // Crea el nuevo comentario
+        Comentarios nuevoComentario = new Comentarios();
+        nuevoComentario.setId_envio(envio);
+        nuevoComentario.setContenido(contenido);
+        nuevoComentario.setFechaComentario(LocalDate.now());
+
+        // Guarda y devuelve
+        return comentariosRepositorio.save(nuevoComentario);
+    }
 
 }
