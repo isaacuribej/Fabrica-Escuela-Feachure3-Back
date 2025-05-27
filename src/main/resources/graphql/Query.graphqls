@@ -1,10 +1,13 @@
 type Query{
     listaClientes(Clientes: ClientesInput):[Clientes]!
     buscaCliente(id_cliente: ID!):Clientes!
+
     obtenerEnvios: [Envios]!
 
     listaAgentes(Agentes: AgentesInput): [Agentes]!
     buscaAgente(id_agente: ID!):Agentes!
+
+    comentariosporEnvio(id_envio: ID!): [Comentarios]!
 
 }
 type Mutation{

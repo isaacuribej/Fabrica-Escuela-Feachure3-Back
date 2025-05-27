@@ -1,0 +1,10 @@
+type Comentarios {
+    id_comentario: Int!
+    id_envio: Envios!
+    contenido: String!
+}
+
+input Comentariosinput{
+    id_envio: Int!
+    contenido: String!
+}
