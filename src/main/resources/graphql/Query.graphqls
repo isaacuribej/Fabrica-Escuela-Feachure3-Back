@@ -1,13 +1,22 @@
 type Query{
     listaClientes(Clientes: ClientesInput):[Clientes]!
     buscaCliente(id_cliente: ID!):Clientes!
+
     obtenerEnvios: [Envios]!
 
+    listaAgentes(Agentes: AgentesInput): [Agentes]!
+    buscaAgente(id_agente: ID!):Agentes!
+
+    comentariosporEnvio(id_envio: ID!): [Comentarios]!
 
 }
 type Mutation{
     insertarCliente(clientesInput: ClientesInput):Clientes!
     deleteCliente(id_cliente: ID!):Boolean!
     updateCliente(id_cliente: ID!, clientesInput: ClientesInput):Clientes!
+    uptadeEnvio(id_envio: ID!, enviosInput: EnviosInput):Envios!
+
+    agregarComentario(id_envio: Int!, contenido: String!): Comentarios!
+
 }
 

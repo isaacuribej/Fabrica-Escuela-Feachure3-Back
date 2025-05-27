@@ -1,7 +1,7 @@
 type Envios {
     id_envio: Int!
-    idCliente : Clientes!
-    idEstado: EstadoEnvio!
+    id_cliente : Clientes!
+    id_estado: EstadoEnvio!
     numeroGuia: String!
     direccionEnvio: String!
     fechaCompra: String! # LocalDate → ISO string
@@ -9,9 +9,17 @@ type Envios {
 }
 
 type EstadoEnvio {
-    idestado: Int!
+    id_estado: Int!
     nombre: String!
 
 }
 
+input EnviosInput{
+    id_cliente : Int!
+    id_estado: Int!
+    numeroGuia: String!
+    direccionEnvio: String!
+    fechaCompra: String! # LocalDate → ISO string
+    precio: Float!
+}
 

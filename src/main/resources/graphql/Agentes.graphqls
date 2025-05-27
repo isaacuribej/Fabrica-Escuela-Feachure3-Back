@@ -1,0 +1,16 @@
+type Agentes{
+    id_agente: Int!
+    nombreUsuario: String!
+    contrasenaHash: String!
+    direccion: String!
+    telefono: String!
+    correoElectronico: String!
+}
+
+input AgentesInput {
+    nombreUsuario: String!
+    contrasenaHash: String!
+    direccion: String!
+    telefono: String!
+    correoElectronico: String!
+}
