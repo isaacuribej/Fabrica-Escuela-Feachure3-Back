@@ -52,6 +52,12 @@ public class EnviosResolver {
             Float precio
     ){}
 
+    @QueryMapping
+    public List<Envios> enviosPorCliente(@Argument Integer id_cliente) {
+        return enviosRepositorio.findAll().stream()
+                .filter(envio -> envio.getId_cliente() != null && envio.getId_cliente().getId_cliente().equals(id_cliente))
+                .toList();
+    }
 
     @MutationMapping
     public Envios uptadeEnvio(@Argument Integer id_envio, @Argument EnviosInput enviosInput) {

@@ -1,0 +1,9 @@
+type Promociones {
+    id_promocion: Int!
+    id_cliente: Clientes!
+    titulo: String!
+    descripcion: String!
+    fechaInicio: String!
+    fechaFin: String!
+
+}

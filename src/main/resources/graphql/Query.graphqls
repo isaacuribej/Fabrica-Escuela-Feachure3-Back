@@ -2,12 +2,20 @@ type Query{
     listaClientes(Clientes: ClientesInput):[Clientes]!
     buscaCliente(id_cliente: ID!):Clientes!
 
+    enviosPorCliente(id_cliente: Int!): [Envios]
+
+
     obtenerEnvios: [Envios]!
     comentariosporEnvio(id_envio: ID!): [Comentarios]!
-    satisfaccionesPorFecha(fechaInicio: String!, fechaFin: String!): [Satisfaccion]!
+
     listaAgentes(Agentes: AgentesInput): [Agentes]!
     buscaAgente(id_agente: ID!):Agentes!
+
     listaSatisfacciones: [Satisfaccion]!
+    satisfaccionesPorFecha(fechaInicio: String!, fechaFin: String!): [Satisfaccion]!
+
+
+    promocionesPorCliente(id_cliente: Int!): [Promociones]
 
 }
 type Mutation{
