@@ -1,0 +1,8 @@
+type Satisfaccion {
+    id_satisfaccion: Int!
+    id_cliente: Clientes!
+    id_envio: Envios!
+    calificacion: Int!
+    comentario_satisfaccion: String!
+}
+
