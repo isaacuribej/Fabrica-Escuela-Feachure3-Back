@@ -5,10 +5,12 @@ import com.prueba.prueba.Clientes.Clientes;
 import com.prueba.prueba.Clientes.ClientesRepositorio;
 import com.prueba.prueba.Envios.Envios;
 import com.prueba.prueba.Envios.EnviosRepositorio;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -38,6 +40,13 @@ public class SatisfaccionResolver {
     @QueryMapping
     public List<Satisfaccion> listaSatisfacciones() {
         return satisfaccionRepositorio.findAll();
+    }
+
+    @QueryMapping
+    public List<Satisfaccion> satisfaccionesPorFecha(@Argument String fechaInicio, @Argument String fechaFin) {
+        LocalDate inicio = LocalDate.parse(fechaInicio);
+        LocalDate fin = LocalDate.parse(fechaFin);
+        return satisfaccionRepositorio.findByFechaEncuestaBetween(inicio, fin);
     }
 
 

@@ -22,17 +22,17 @@ public class Satisfaccion {
     @JoinColumn(name = "id_envio", nullable = false)
     private Envios id_envio;
 
-    private LocalDate fecha_encuesta;
+    private LocalDate fechaEncuesta;
 
     private Integer calificacion;
 
     private String comentario_satisfaccion;
 
 
-    public Satisfaccion(Clientes id_cliente, Envios id_envio, LocalDate fecha_encuesta, Integer calificacion, String comentario_satisfaccion) {
+    public Satisfaccion(Clientes id_cliente, Envios id_envio, LocalDate fechaEncuesta, Integer calificacion, String comentario_satisfaccion) {
         this.id_cliente = id_cliente;
         this.id_envio = id_envio;
-        this.fecha_encuesta = fecha_encuesta;
+        this.fechaEncuesta = fechaEncuesta;
         this.calificacion = calificacion;
         this.comentario_satisfaccion = comentario_satisfaccion;
     }
@@ -56,12 +56,12 @@ public class Satisfaccion {
         this.calificacion = calificacion;
     }
 
-    public LocalDate getFecha_encuesta() {
-        return fecha_encuesta;
+    public LocalDate getFechaEncuesta() {
+        return fechaEncuesta;
     }
 
-    public void setFecha_encuesta(LocalDate fecha_encuesta) {
-        this.fecha_encuesta = fecha_encuesta;
+    public void setFechaEncuesta(LocalDate fechaEncuesta) {
+        this.fechaEncuesta = fechaEncuesta;
     }
 
     public Envios getId_envio() {
@@ -94,7 +94,7 @@ public class Satisfaccion {
                 "id_satisfaccion=" + id_satisfaccion +
                 ", id_cliente=" + id_cliente +
                 ", id_envio=" + id_envio +
-                ", fecha_encuesta=" + fecha_encuesta +
+                ", fechaEncuesta=" + fechaEncuesta +
                 ", calificacion=" + calificacion +
                 ", comentario_satisfaccion='" + comentario_satisfaccion + '\'' +
                 '}';
