@@ -28,6 +28,8 @@ type Mutation{
     insertarAgente(agentesInput: AgentesInput):Agentes!
 
     LoginAgente(nombreUsuario: String!, contrasenaHash: String!): Boolean
+    LoginCliente(correoElectronico: String!, contrasenaHash: String!): Boolean
+
 
 
 }

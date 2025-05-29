@@ -1,5 +1,6 @@
 package com.prueba.prueba.Clientes;
 
+import com.prueba.prueba.Agentes.Agentes;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 
 import java.util.List;
+import com.prueba.prueba.Utilities.PasswordEncryptor;
 
 
 
@@ -14,13 +16,18 @@ import java.util.List;
 
 public class ClientesResolver {
     private  final  ClientesRepositorio clientesRepositorio;
+    private final PasswordEncryptor passwordEncryptor;
+
 
     private final TipodocumentoRepositorio tipodocumentoRepositorio;
 
-    public ClientesResolver(ClientesRepositorio clientesRepositorio, TipodocumentoRepositorio tipodocumentoRepositorio) {
+    public ClientesResolver(ClientesRepositorio clientesRepositorio, TipodocumentoRepositorio tipodocumentoRepositorio, PasswordEncryptor passwordEncryptor) {
         this.clientesRepositorio = clientesRepositorio;
         this.tipodocumentoRepositorio = tipodocumentoRepositorio;
+        this.passwordEncryptor = passwordEncryptor;
+
     }
+
 
     @SchemaMapping(typeName = "Clientes", field = "idTipoDocumento")
     public Tipodocumento resolverTipoDocumento(Clientes cliente) {
@@ -59,7 +66,7 @@ public class ClientesResolver {
         cliente.setApellido(clientesInput.apellido());
         cliente.setNumeroDocumento(clientesInput.numeroDocumento());
         cliente.setCorreoElectronico(clientesInput.correoElectronico());
-        cliente.setContrasenaHash(clientesInput.contrasenaHash());
+        cliente.setContrasenaHash(passwordEncryptor.encrypt(clientesInput.contrasenaHash()));
         cliente.setDireccion(clientesInput.direccion());
         cliente.setTelefono(clientesInput.telefono());
 
@@ -85,10 +92,28 @@ public class ClientesResolver {
         cliente.setApellido(clientesInput.apellido());
         cliente.setNumeroDocumento(clientesInput.numeroDocumento());
         cliente.setCorreoElectronico(clientesInput.correoElectronico());
-        cliente.setContrasenaHash(clientesInput.contrasenaHash());
+        cliente.setContrasenaHash(passwordEncryptor.encrypt(clientesInput.contrasenaHash()));
         cliente.setDireccion(clientesInput.direccion());
         cliente.setTelefono(clientesInput.telefono());
 
         return clientesRepositorio.save(cliente);
     }
+
+
+    public boolean validarLogin(String correoElectronico, String contrasenaHash) {
+        Clientes clientes = clientesRepositorio.findByCorreoElectronico(correoElectronico).orElse(null);
+        if (correoElectronico == null) return false;
+        return passwordEncryptor.matches(contrasenaHash, clientes.getContrasenaHash());
+    }
+
+
+    @MutationMapping(name = "LoginCliente")
+    public Boolean LoginCliente(@Argument String correoElectronico, @Argument String contrasenaHash) {
+        return validarLogin(correoElectronico, contrasenaHash);
+    }
+
+
+
+
+
 }
