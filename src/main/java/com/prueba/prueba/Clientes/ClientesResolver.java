@@ -100,10 +100,15 @@ public class ClientesResolver {
     }
 
 
+
     public boolean validarLogin(String correoElectronico, String contrasenaHash) {
         Clientes clientes = clientesRepositorio.findByCorreoElectronico(correoElectronico).orElse(null);
-        if (correoElectronico == null) return false;
-        return passwordEncryptor.matches(contrasenaHash, clientes.getContrasenaHash());
+        if (clientes == null) return false;
+        try {
+            return passwordEncryptor.matches(contrasenaHash, clientes.getContrasenaHash());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 

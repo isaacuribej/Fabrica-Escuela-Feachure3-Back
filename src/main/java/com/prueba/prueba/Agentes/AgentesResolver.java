@@ -35,8 +35,12 @@ public class AgentesResolver {
 
     public boolean validarLogin(String nombreUsuario, String contrasenaHash) {
         Agentes agentes = agentesRepositorio.findByNombreUsuario(nombreUsuario).orElse(null);
-        if (nombreUsuario == null) return false;
-        return passwordEncryptor.matches(contrasenaHash, agentes.getContrasenaHash());
+        if (agentes == null) return false;
+        try {
+            return passwordEncryptor.matches(contrasenaHash, agentes.getContrasenaHash());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @MutationMapping(name = "LoginAgente")
