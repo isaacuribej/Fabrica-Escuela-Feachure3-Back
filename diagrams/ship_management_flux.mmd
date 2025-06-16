@@ -1,0 +1,55 @@
+sequenceDiagram
+    participant C as Cliente
+    participant A as Agente
+    participant GQL as GraphQL API
+    participant ER as EnviosResolver
+    participant REP as EnviosRepositorio
+    participant DB as PostgreSQL
+    
+    Note over C,DB: Ciclo de Vida de un Envío
+    
+    A->>GQL: mutation crearEnvio
+    Note right of A: id_cliente, direccion,<br/>precio, numeroGuia
+    
+    GQL->>ER: crearEnvio(EnviosInput)
+    ER->>REP: save(nuevoEnvio)
+    REP->>DB: INSERT INTO envios...
+    DB-->>REP: Envío creado
+    REP-->>ER: Envio entity
+    ER-->>GQL: Envío creado
+    GQL-->>A: Confirmación
+    
+    Note over C,DB: Cliente consulta sus envíos
+    
+    C->>GQL: query enviosPorCliente(id_cliente)
+    GQL->>ER: enviosPorCliente(id_cliente)
+    ER->>REP: findAll() + filtrado
+    REP->>DB: SELECT * FROM envios...
+    DB-->>REP: Lista de envíos
+    REP-->>ER: List<Envios>
+    ER-->>GQL: Envíos del cliente
+    GQL-->>C: Lista de envíos
+    
+    Note over C,DB: Actualización de estado
+    
+    A->>GQL: mutation updateEnvio
+    Note right of A: cambio de estado
+    
+    GQL->>ER: updateEnvio(id, input)
+    ER->>REP: save(envioActualizado)
+    REP->>DB: UPDATE envios SET...
+    DB-->>REP: Envío actualizado
+    REP-->>ER: Envio entity
+    ER-->>GQL: Envío actualizado
+    GQL-->>A: Confirmación
+    
+    Note over C,DB: Cliente añade comentario
+    
+    C->>GQL: mutation agregarComentario
+    GQL->>ER: agregarComentario(id_envio, contenido)
+    ER->>REP: save(comentario)
+    REP->>DB: INSERT INTO comentarios...
+    DB-->>REP: Comentario creado
+    REP-->>ER: Comentario entity
+    ER-->>GQL: Comentario añadido
+    GQL-->>C: Confirmación

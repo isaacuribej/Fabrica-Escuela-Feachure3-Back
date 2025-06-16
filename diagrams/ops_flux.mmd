@@ -1,0 +1,48 @@
+flowchart TD
+    A[Inicio del Sistema] --> B{¿Usuario autenticado?}
+    
+    B -->|No| C[Login Cliente/Agente]
+    C --> D[Validar Credenciales]
+    D -->|Válidas| E[Acceso Autorizado]
+    D -->|Inválidas| F[Acceso Denegado]
+    F --> C
+    
+    B -->|Sí| E
+    E --> G{¿Tipo de Usuario?}
+    
+    G -->|Cliente| H[Operaciones de Cliente]
+    G -->|Agente| I[Operaciones de Agente]
+    
+    H --> H1[Ver mis envíos]
+    H --> H2[Ver promociones]
+    H --> H3[Calificar servicio]
+    H --> H4[Comentar envío]
+    H --> H5[Actualizar perfil]
+    
+    I --> I1[Gestionar clientes]
+    I --> I2[Gestionar envíos]
+    I --> I3[Ver satisfacción]
+    I --> I4[Actualizar estados]
+    
+    H1 --> J[Consultar BD]
+    H2 --> J
+    H3 --> K[Crear registro satisfacción]
+    H4 --> L[Crear comentario]
+    H5 --> M[Actualizar datos cliente]
+    
+    I1 --> N[CRUD Clientes]
+    I2 --> O[CRUD Envíos]
+    I3 --> P[Consultar métricas]
+    I4 --> Q[Actualizar estado envío]
+    
+    J --> R[(Base de Datos)]
+    K --> R
+    L --> R
+    M --> R
+    N --> R
+    O --> R
+    P --> R
+    Q --> R
+    
+    R --> S[Respuesta GraphQL]
+    S --> T[Resultado al Cliente]

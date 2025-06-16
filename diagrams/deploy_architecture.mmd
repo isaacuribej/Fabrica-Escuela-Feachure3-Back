@@ -1,0 +1,68 @@
+graph TB
+    subgraph "Entorno de Desarrollo"
+        DEV[Desarrollador]
+        IDE[IDE - Cursor/VS Code]
+    end
+    
+    subgraph "Construcción y Build"
+        MVN[Maven Build]
+        JAR[Spring Boot JAR]
+        DOCKER_BUILD[Docker Build]
+        IMAGE[Docker Image]
+    end
+    
+    subgraph "Contenedores Docker"
+        subgraph "App Container"
+            APP[CourierSyncBack<br/>Spring Boot App<br/>Puerto 8080]
+            JVM[JVM 17]
+        end
+        
+        subgraph "Database Container"
+            POSTGRES[PostgreSQL<br/>Puerto 5432]
+            DATA[(Datos Persistentes)]
+        end
+    end
+    
+    subgraph "Red Docker"
+        NETWORK[Docker Network]
+    end
+    
+    subgraph "Acceso Externo"
+        CLIENT[Cliente GraphQL]
+        GRAPHIQL[GraphiQL Interface]
+        BROWSER[Navegador Web]
+    end
+    
+    subgraph "Configuración"
+        COMPOSE[docker-compose.yaml]
+        PROPS[application.properties]
+        ENV[Variables de Entorno]
+    end
+    
+    DEV --> IDE
+    IDE --> MVN
+    MVN --> JAR
+    JAR --> DOCKER_BUILD
+    DOCKER_BUILD --> IMAGE
+    
+    COMPOSE --> APP
+    COMPOSE --> POSTGRES
+    
+    APP --> JVM
+    POSTGRES --> DATA
+    
+    APP -.-> NETWORK
+    POSTGRES -.-> NETWORK
+    
+    CLIENT --> APP
+    GRAPHIQL --> APP
+    BROWSER --> APP
+    
+    ENV --> APP
+    PROPS --> APP
+    
+    APP <--> POSTGRES
+    
+    style APP fill:#e3f2fd
+    style POSTGRES fill:#e8f5e8
+    style NETWORK fill:#fce4ec

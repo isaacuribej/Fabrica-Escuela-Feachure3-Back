@@ -22,6 +22,7 @@ type Mutation{
     insertarCliente(clientesInput: ClientesInput):Clientes!
     deleteCliente(id_cliente: ID!):Boolean!
     updateCliente(id_cliente: ID!, clientesInput: ClientesInput):Clientes!
+    updateClienteProfile(id_cliente: ID!, clientesUpdateInput: ClientesUpdateInput):Clientes!
     uptadeEnvio(id_envio: ID!, enviosInput: EnviosInput):Envios!
 
     agregarComentario(id_envio: Int!, contenido: String!): Comentarios!

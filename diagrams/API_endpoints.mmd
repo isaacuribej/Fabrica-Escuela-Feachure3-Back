@@ -1,0 +1,95 @@
+graph LR
+    subgraph "GraphQL API Endpoints"
+        subgraph "Queries (Consultas)"
+            Q1[listaClientes]
+            Q2[buscaCliente]
+            Q3[enviosPorCliente]
+            Q4[obtenerEnvios]
+            Q5[comentariosporEnvio]
+            Q6[listaAgentes]
+            Q7[buscaAgente]
+            Q8[listaSatisfacciones]
+            Q9[satisfaccionesPorFecha]
+            Q10[promocionesPorCliente]
+        end
+        
+        subgraph "Mutations (Modificaciones)"
+            M1[insertarCliente]
+            M2[updateCliente]
+            M3[deleteCliente]
+            M4[LoginCliente]
+            M5[insertarAgente]
+            M6[LoginAgente]
+            M7[uptadeEnvio]
+            M8[agregarComentario]
+        end
+    end
+    
+    subgraph "Resolvers"
+        CR[ClientesResolver]
+        AR[AgentesResolver]
+        ER[EnviosResolver]
+        SAR[SatisfaccionResolver]
+        PR[PromocionesResolver]
+        COR[ComentariosResolver]
+    end
+    
+    subgraph "Entidades de Datos"
+        CE[Clientes Entity]
+        AE[Agentes Entity]
+        EE[Envios Entity]
+        SAE[Satisfaccion Entity]
+        PE[Promociones Entity]
+        COE[Comentarios Entity]
+    end
+    
+    Q1 --> CR
+    Q2 --> CR
+    M1 --> CR
+    M2 --> CR
+    M3 --> CR
+    M4 --> CR
+    
+    Q6 --> AR
+    Q7 --> AR
+    M5 --> AR
+    M6 --> AR
+    
+    Q3 --> ER
+    Q4 --> ER
+    M7 --> ER
+    
+    Q8 --> SAR
+    Q9 --> SAR
+    
+    Q10 --> PR
+    
+    Q5 --> COR
+    M8 --> COR
+    
+    CR --> CE
+    AR --> AE
+    ER --> EE
+    SAR --> SAE
+    PR --> PE
+    COR --> COE
+    
+    style Q1 fill:#e8f5e8
+    style Q2 fill:#e8f5e8
+    style Q3 fill:#e8f5e8
+    style Q4 fill:#e8f5e8
+    style Q5 fill:#e8f5e8
+    style Q6 fill:#e8f5e8
+    style Q7 fill:#e8f5e8
+    style Q8 fill:#e8f5e8
+    style Q9 fill:#e8f5e8
+    style Q10 fill:#e8f5e8
+    
+    style M1 fill:#fff3e0
+    style M2 fill:#fff3e0
+    style M3 fill:#fff3e0
+    style M4 fill:#fff3e0
+    style M5 fill:#fff3e0
+    style M6 fill:#fff3e0
+    style M7 fill:#fff3e0
+    style M8 fill:#fff3e0

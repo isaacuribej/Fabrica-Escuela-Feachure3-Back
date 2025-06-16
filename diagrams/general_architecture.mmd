@@ -1,0 +1,87 @@
+graph TB
+    subgraph "Frontend/Cliente"
+        FE[Cliente GraphQL]
+    end
+    
+    subgraph "Aplicación Spring Boot"
+        subgraph "Capa de Controladores"
+            GQL[GraphQL Endpoint]
+            WEB[Web Config<br/>CORS]
+        end
+        
+        subgraph "Capa de Resolvers"
+            CR[ClientesResolver]
+            AR[AgentesResolver]
+            ER[EnviosResolver]
+            SAR[SatisfaccionResolver]
+            PR[PromocionesResolver]
+            COR[ComentariosResolver]
+        end
+        
+        subgraph "Capa de Servicios"
+            PE[PasswordEncryptor]
+            SEC[SecurityConfig]
+        end
+        
+        subgraph "Capa de Repositorios"
+            CRep[ClientesRepositorio]
+            ARep[AgentesRepositorio]
+            ERep[EnviosRepositorio]
+            SARep[SatisfaccionRepositorio]
+            PRep[PromocionRepositorio]
+            CORep[ComentariosRepositorio]
+            TRep[TipodocumentoRepositorio]
+            EERep[EstadoenvioRepositorio]
+        end
+        
+        subgraph "Capa de Entidades JPA"
+            C[Clientes]
+            A[Agentes]
+            E[Envios]
+            SA[Satisfaccion]
+            P[Promociones]
+            CO[Comentarios]
+            TD[TipoDocumento]
+            EE[EstadoEnvio]
+        end
+    end
+    
+    subgraph "Base de Datos"
+        DB[(PostgreSQL<br/>courier_sync)]
+    end
+    
+    FE --> GQL
+    GQL --> CR
+    GQL --> AR
+    GQL --> ER
+    GQL --> SAR
+    GQL --> PR
+    GQL --> COR
+    
+    CR --> PE
+    AR --> PE
+    
+    CR --> CRep
+    AR --> ARep
+    ER --> ERep
+    SAR --> SARep
+    PR --> PRep
+    COR --> CORep
+    
+    CRep --> C
+    ARep --> A
+    ERep --> E
+    SARep --> SA
+    PRep --> P
+    CORep --> CO
+    TRep --> TD
+    EERep --> EE
+    
+    C --> DB
+    A --> DB
+    E --> DB
+    SA --> DB
+    P --> DB
+    CO --> DB
+    TD --> DB
+    EE --> DB

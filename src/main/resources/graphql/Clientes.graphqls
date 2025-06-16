@@ -25,3 +25,14 @@ input ClientesInput {
     direccion: String!
     telefono: String!
 }
+
+# Nuevo input para actualizaciones de perfil (sin contraseña)
+input ClientesUpdateInput {
+    idTipoDocumento: Int
+    nombre: String
+    apellido: String
+    numeroDocumento: String
+    correoElectronico: String
+    direccion: String
+    telefono: String
+}

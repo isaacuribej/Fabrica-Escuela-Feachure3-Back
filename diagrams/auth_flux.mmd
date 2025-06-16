@@ -1,0 +1,34 @@
+sequenceDiagram
+    participant C as Cliente/Agente
+    participant GQL as GraphQL API
+    participant CR as ClientesResolver/AgentesResolver
+    participant PE as PasswordEncryptor
+    participant REP as Repositorio
+    participant DB as PostgreSQL
+    
+    Note over C,DB: Proceso de Autenticación
+    
+    C->>GQL: mutation LoginCliente/LoginAgente
+    Note right of C: correoElectronico/nombreUsuario<br/>+ contrasenaHash
+    
+    GQL->>CR: loginCliente/loginAgente
+    CR->>REP: findByCorreoElectronico/findByNombreUsuario
+    REP->>DB: SELECT * FROM clientes/agentes WHERE...
+    DB-->>REP: Usuario encontrado/No encontrado
+    REP-->>CR: Optional<Usuario>
+    
+    alt Usuario encontrado
+        CR->>PE: matches(contrasenaPlana, hashEnBD)
+        PE-->>CR: boolean resultado
+        
+        alt Contraseña válida
+            CR-->>GQL: true (autenticado)
+            GQL-->>C: Login exitoso
+        else Contraseña inválida
+            CR-->>GQL: false (no autenticado)
+            GQL-->>C: Credenciales incorrectas
+        end
+    else Usuario no encontrado
+        CR-->>GQL: false (no autenticado)
+        GQL-->>C: Usuario no existe
+    end

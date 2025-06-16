@@ -1,0 +1,74 @@
+erDiagram
+    TIPODOCUMENTO {
+        int idTipoDocumento PK
+        string nombre
+    }
+    
+    CLIENTES {
+        int id_cliente PK
+        int id_tipo_documento FK
+        string nombre
+        string apellido
+        string numeroDocumento
+        string correoElectronico
+        string contrasenaHash
+        string direccion
+        string telefono
+    }
+    
+    AGENTES {
+        int id_agente PK
+        string nombreUsuario
+        string contrasenaHash
+        string direccion
+        string telefono
+        string correoElectronico
+    }
+    
+    ESTADOENVIOS {
+        int id_estado PK
+        string nombre
+    }
+    
+    ENVIOS {
+        int id_envio PK
+        int id_cliente FK
+        int id_estado FK
+        string numeroGuia
+        string direccionEnvio
+        date fechaCompra
+        decimal precio
+    }
+    
+    COMENTARIOS {
+        int id_comentario PK
+        int id_envio FK
+        date fechaComentario
+        string contenido
+    }
+    
+    SATISFACCION {
+        int id_satisfaccion PK
+        int id_cliente FK
+        int id_envio FK
+        date fechaEncuesta
+        int calificacion
+        string comentario_satisfaccion
+    }
+    
+    PROMOCIONES {
+        int id_promocion PK
+        int id_cliente FK
+        string titulo
+        string descripcion
+        date fechaInicio
+        date fechaFin
+    }
+    
+    TIPODOCUMENTO ||--o{ CLIENTES : "tiene"
+    CLIENTES ||--o{ ENVIOS : "realiza"
+    CLIENTES ||--o{ SATISFACCION : "califica"
+    CLIENTES ||--o{ PROMOCIONES : "recibe"
+    ESTADOENVIOS ||--o{ ENVIOS : "define"
+    ENVIOS ||--o{ COMENTARIOS : "tiene"
+    ENVIOS ||--o{ SATISFACCION : "evalua"

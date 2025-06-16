@@ -1,0 +1,65 @@
+graph TD
+    subgraph "Frontend"
+        FE[Cliente GraphQL]
+    end
+    
+    subgraph "Backend - Spring Boot 3.4.5"
+        subgraph "Capa de Presentación"
+            GQL[Spring GraphQL]
+            CORS[CORS Configuration]
+        end
+        
+        subgraph "Capa de Seguridad"
+            SEC[Spring Security 3.4.5]
+            BCRYPT[BCrypt Password Encoder]
+        end
+        
+        subgraph "Capa de Lógica de Negocio"
+            RES[GraphQL Resolvers]
+            UTIL[Utilities - PasswordEncryptor]
+        end
+        
+        subgraph "Capa de Persistencia"
+            JPA[Spring Data JPA]
+            HIB[Hibernate ORM]
+            REPO[JPA Repositories]
+        end
+        
+        subgraph "Configuración"
+            PROPS[application.properties]
+            SCHEMA[GraphQL Schemas]
+        end
+    end
+    
+    subgraph "Base de Datos"
+        PG[(PostgreSQL)]
+    end
+    
+    subgraph "Contenedores"
+        DOCKER[Docker Compose]
+    end
+    
+    subgraph "Build Tools"
+        MAVEN[Maven]
+        POM[pom.xml]
+    end
+    
+    FE --> GQL
+    GQL --> SEC
+    SEC --> RES
+    RES --> UTIL
+    RES --> JPA
+    JPA --> HIB
+    HIB --> REPO
+    REPO --> PG
+    
+    DOCKER --> PG
+    MAVEN --> POM
+    
+    PROPS --> JPA
+    SCHEMA --> GQL
+    
+    style GQL fill:#e1f5fe
+    style JPA fill:#f3e5f5
+    style PG fill:#e8f5e8
+    style SEC fill:#fff3e0
