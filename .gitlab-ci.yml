@@ -1,0 +1,52 @@
+stages:
+  - build
+  - test
+  - sonarcloud
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository" # Optimiza el uso del cache de Maven
+
+cache:
+  paths:
+    - .m2/repository
+
+build:
+  stage: build
+  script:
+    - echo "Building the project..."
+    - mvn clean package -DskipTests # Compila y empaqueta sin ejecutar tests aún
+
+test:
+  stage: test
+  script:
+    - echo "Running tests and generating coverage report..."
+    - mvn verify # Ejecuta tests y JaCoCo genera jacoco.xml
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura # Formato para que GitLab muestre la cobertura
+        path: target/site/jacoco/jacoco.xml
+    paths:
+      - target/site/jacoco/jacoco.xml # Asegura que el archivo de cobertura esté disponible para el siguiente stage
+
+sonarcloud:
+  stage: sonarcloud
+  image:
+    name: sonarsource/sonarscanner-cli:latest
+    entrypoint: [""]
+  variables:
+    SONAR_TOKEN: $SONAR_TOKEN # Variable de entorno secreta en GitLab CI/CD
+    SONAR_HOST_URL: "https://sonarcloud.io"
+  script:
+    - echo "Analyzing project with SonarCloud..."
+    - sonar-scanner 
+        -Dsonar.projectKey=isaacuribej_Fabrica-Escuela-Feachure3-Back 
+        -Dsonar.organization=isaacuribej
+        -Dsonar.sources=. 
+        -Dsonar.java.binaries=. 
+        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml # Indica a SonarCloud dónde encontrar el informe de cobertura
+  dependencies: # Este stage depende del stage 'test' para obtener el informe de cobertura
+    - test
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH # Ejecuta el análisis completo solo en la rama por defecto
+    - if: $CI_MERGE_REQUEST_IID # Ejecuta análisis para Pull/Merge Requests
