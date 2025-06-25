@@ -1,4 +1,4 @@
-package com.prueba.prueba.Comentariios;
+package com.prueba.prueba.Comentarios;
 
 
 import com.prueba.prueba.Envios.Envios;
@@ -10,18 +10,18 @@ import java.time.LocalDate;
 public class Comentarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_comentario;
+    private Integer idComentario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_envio", nullable = false)
-    private Envios id_envio;
+    @JoinColumn(name = "idEnvio", nullable = false)
+    private Envios idEnvio;
 
     private LocalDate fechaComentario;
 
     private String contenido;
 
     public Comentarios(Envios id_envio, LocalDate fechaComentario, String contenido) {
-        this.id_envio = id_envio;
+        this.idEnvio = id_envio;
         this.fechaComentario = fechaComentario;
         this.contenido = contenido;
     }
@@ -46,26 +46,26 @@ public class Comentarios {
     }
 
     public Envios getId_envio() {
-        return id_envio;
+        return idEnvio;
     }
 
     public void setId_envio(Envios id_envio) {
-        this.id_envio = id_envio;
+        this.idEnvio = id_envio;
     }
 
     public Integer getId_comentario() {
-        return id_comentario;
+        return idComentario;
     }
 
     public void setId_comentario(Integer id_comentario) {
-        this.id_comentario = id_comentario;
+        this.idComentario = id_comentario;
     }
 
     @Override
     public String toString() {
         return "Comentarios{" +
-                "id_comentario=" + id_comentario +
-                ", id_envio=" + id_envio +
+                "id_comentario=" + idComentario +
+                ", id_envio=" + idEnvio +
                 ", fechaComentario=" + fechaComentario +
                 ", contenido='" + contenido + '\'' +
                 '}';

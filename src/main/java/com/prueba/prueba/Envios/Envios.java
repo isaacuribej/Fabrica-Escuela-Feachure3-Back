@@ -11,15 +11,15 @@ public class Envios {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_envio;
+    private Integer idEnvio;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_cliente", nullable = false)
-    private Clientes id_cliente;
+    @JoinColumn(name = "idCliente", nullable = false)
+    private Clientes idCliente;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_estado", nullable = false)
-    private Estadoenvio id_estado;
+    @JoinColumn(name = "idEstado", nullable = false)
+    private Estadoenvio idEstado;
 
     private String numeroGuia;
 
@@ -27,42 +27,42 @@ public class Envios {
 
     private LocalDate fechaCompra;
 
-    private BigDecimal precio;
-
-    public Envios(Estadoenvio id_estado, String direccionEnvio, BigDecimal precio, LocalDate fechaCompra, String numeroGuia, Clientes id_cliente) {
-        this.id_estado = id_estado;
+    private BigDecimal precio;    
+    
+    public Envios(Estadoenvio idEstado, String direccionEnvio, BigDecimal precio, LocalDate fechaCompra, String numeroGuia, Clientes idCliente) {
+        this.idEstado = idEstado;
         this.direccionEnvio = direccionEnvio;
         this.precio = precio;
         this.fechaCompra = fechaCompra;
         this.numeroGuia = numeroGuia;
-        this.id_cliente = id_cliente;
+        this.idCliente = idCliente;
     }
 
     public Envios() {
     }
 
     public Integer getId_envio() {
-        return id_envio;
+        return idEnvio;
     }
 
-    public void setId_envio(Integer id_envio) {
-        this.id_envio = id_envio;
+    public void setId_envio(Integer idEnvio) {
+        this.idEnvio = idEnvio;
     }
 
     public Clientes getId_cliente() {
-        return id_cliente;
+        return idCliente;
     }
 
-    public void setId_cliente(Clientes id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setId_cliente(Clientes idCliente) {
+        this.idCliente = idCliente;
     }
 
     public Estadoenvio getId_estado() {
-        return id_estado;
+        return idEstado;
     }
 
-    public void setId_estado(Estadoenvio id_estado) {
-        this.id_estado = id_estado;
+    public void setId_estado(Estadoenvio idEstado) {
+        this.idEstado = idEstado;
     }
 
     public String getNumeroGuia() {
@@ -100,10 +100,10 @@ public class Envios {
     @Override
     public String toString() {
         return "Envios{" +
-                "id_envio=" + id_envio +
-                ", id_cliente=" + id_cliente +
-                ", id_estado=" + id_estado +
-                ", numeroGuia='" + numeroGuia + '\'' +
+                "id_envio=" + idEnvio +
+                ", idCliente=" + idCliente +
+                ", idEstado=" + idEstado +
+                ", numeroGuia='" + numeroGuia + '\'' +                
                 ", direccionEnvio='" + direccionEnvio + '\'' +
                 ", fechaCompra=" + fechaCompra +
                 ", precio=" + precio +

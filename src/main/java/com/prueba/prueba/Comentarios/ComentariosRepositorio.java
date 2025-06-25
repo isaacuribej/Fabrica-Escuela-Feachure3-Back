@@ -1,4 +1,4 @@
-package com.prueba.prueba.Comentariios;
+package com.prueba.prueba.Comentarios;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

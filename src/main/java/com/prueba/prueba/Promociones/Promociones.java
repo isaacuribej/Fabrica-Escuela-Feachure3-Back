@@ -13,11 +13,11 @@ public class Promociones {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_promocion;
+    private Integer idPromocion;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "id_cliente", nullable = false)
+    @JoinColumn(name = "idCliente", nullable = false)
     private Clientes id_cliente;
 
     @Column(name = "titulo", nullable = false, length = 100)
@@ -29,12 +29,12 @@ public class Promociones {
 
     private LocalDate fechaFin;
 
-    public Promociones(LocalDate fechaFin, LocalDate fechaInicio, String descripcion, String titulo, Clientes id_cliente) {
+    public Promociones(LocalDate fechaFin, LocalDate fechaInicio, String descripcion, String titulo, Clientes idCliente) {
         this.fechaFin = fechaFin;
         this.fechaInicio = fechaInicio;
         this.descripcion = descripcion;
         this.titulo = titulo;
-        this.id_cliente = id_cliente;
+        this.id_cliente = idCliente;
     }
 
     public Promociones() {
@@ -81,17 +81,17 @@ public class Promociones {
     }
 
     public Integer getId_promocion() {
-        return id_promocion;
+        return idPromocion;
     }
 
     public void setId_promocion(Integer id_promocion) {
-        this.id_promocion = id_promocion;
+        this.idPromocion = id_promocion;
     }
 
     @Override
     public String toString() {
         return "Promociones{" +
-                "id_promocion=" + id_promocion +
+                "id_promocion=" + idPromocion +
                 ", id_cliente=" + id_cliente +
                 ", titulo='" + titulo + '\'' +
                 ", descripcion='" + descripcion + '\'' +

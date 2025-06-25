@@ -27,12 +27,12 @@ public class EnviosResolver {
         this.estadoenvioRepositorio = estadoenvioRepositorio;
     }
 
-    @SchemaMapping(typeName = "Envios", field = "id_estado")
+    @SchemaMapping(typeName = "Envios", field = "idEstado")
     public Estadoenvio resolverEstadoEnvio(Envios envios) {
         return  envios.getId_estado();
     }
 
-    @SchemaMapping(typeName = "Envios", field = "id_cliente")
+    @SchemaMapping(typeName = "Envios", field = "idCliente")
     public Clientes resolverCliente(Envios envios) {
         return envios.getId_cliente();
     }
@@ -44,8 +44,8 @@ public class EnviosResolver {
     }
 
     public record EnviosInput(
-            Integer id_cliente,
-            Integer id_estado,
+            Integer idCliente,
+            Integer idEstado,
             String numeroGuia,
             String direccionEnvio,
             String fechaCompra,
@@ -53,19 +53,19 @@ public class EnviosResolver {
     ){}
 
     @QueryMapping
-    public List<Envios> enviosPorCliente(@Argument Integer id_cliente) {
+    public List<Envios> enviosPorCliente(@Argument Integer idCliente) {
         return enviosRepositorio.findAll().stream()
-                .filter(envio -> envio.getId_cliente() != null && envio.getId_cliente().getId_cliente().equals(id_cliente))
+                .filter(envio -> envio.getId_cliente() != null && envio.getId_cliente().getId_cliente().equals(idCliente))
                 .toList();
     }
 
     @MutationMapping
-    public Envios uptadeEnvio(@Argument Integer id_envio, @Argument EnviosInput enviosInput) {
-        Envios envio = enviosRepositorio.findById(id_envio)
+    public Envios uptadeEnvio(@Argument Integer idEnvio, @Argument EnviosInput enviosInput) {
+        Envios envio = enviosRepositorio.findById(idEnvio)
                 .orElseThrow(() -> new RuntimeException("Envio no encontrado"));
-        Clientes cliente = clientesRepositorio.findById(enviosInput.id_cliente())
+        Clientes cliente = clientesRepositorio.findById(enviosInput.idCliente())
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
-        Estadoenvio estado = estadoenvioRepositorio.findById(enviosInput.id_estado())
+        Estadoenvio estado = estadoenvioRepositorio.findById(enviosInput.idEstado())
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
         envio.setId_cliente(cliente);

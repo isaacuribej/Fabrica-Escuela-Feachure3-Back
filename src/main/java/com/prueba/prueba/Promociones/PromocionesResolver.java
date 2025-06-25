@@ -22,16 +22,16 @@ public class PromocionesResolver {
     }
 
 
-    @SchemaMapping(typeName = "Promociones", field = "id_cliente")
+    @SchemaMapping(typeName = "Promociones", field = "idCliente")
     public Clientes resolverCliente(Promociones promociones) {
         return promociones.getId_cliente();
     }
 
     @QueryMapping
-    public List<Promociones> promocionesPorCliente(@Argument Integer id_cliente) {
+    public List<Promociones> promocionesPorCliente(@Argument Integer idCliente) {
         // Recupera todas las promociones y filtra por ID de cliente
         return promocionRepositorio.findAll().stream()
-                .filter(promo -> promo.getId_cliente() != null && promo.getId_cliente().getId_cliente().equals(id_cliente))
+                .filter(promo -> promo.getId_cliente() != null && promo.getId_cliente().getId_cliente().equals(idCliente))
                 .toList();
     }
 

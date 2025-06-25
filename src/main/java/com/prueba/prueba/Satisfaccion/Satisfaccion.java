@@ -15,12 +15,12 @@ public class Satisfaccion {
     private Integer id_satisfaccion;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_cliente", nullable = false)
-    private Clientes id_cliente;
+    @JoinColumn(name = "idCliente", nullable = false)
+    private Clientes idCliente;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_envio", nullable = false)
-    private Envios id_envio;
+    @JoinColumn(name = "idEnvio", nullable = false)
+    private Envios idEnvio;
 
     private LocalDate fechaEncuesta;
 
@@ -29,12 +29,12 @@ public class Satisfaccion {
     private String comentario_satisfaccion;
 
 
-    public Satisfaccion(Clientes id_cliente, Envios id_envio, LocalDate fechaEncuesta, Integer calificacion, String comentario_satisfaccion) {
-        this.id_cliente = id_cliente;
-        this.id_envio = id_envio;
+    public Satisfaccion(Clientes idCliente, Envios idEnvio, LocalDate fechaEncuesta, Integer calificacion, String comentarioSatisfaccion) {
+        this.idCliente = idCliente;
+        this.idEnvio = idEnvio;
         this.fechaEncuesta = fechaEncuesta;
         this.calificacion = calificacion;
-        this.comentario_satisfaccion = comentario_satisfaccion;
+        this.comentario_satisfaccion = comentarioSatisfaccion;
     }
 
     public Satisfaccion() {
@@ -65,19 +65,19 @@ public class Satisfaccion {
     }
 
     public Envios getId_envio() {
-        return id_envio;
+        return idEnvio;
     }
 
     public void setId_envio(Envios id_envio) {
-        this.id_envio = id_envio;
+        this.idEnvio = id_envio;
     }
 
     public Clientes getId_cliente() {
-        return id_cliente;
+        return idCliente;
     }
 
     public void setId_cliente(Clientes id_cliente) {
-        this.id_cliente = id_cliente;
+        this.idCliente = id_cliente;
     }
 
     public Integer getId_satisfaccion() {
@@ -92,8 +92,8 @@ public class Satisfaccion {
     public String toString() {
         return "Satisfaccion{" +
                 "id_satisfaccion=" + id_satisfaccion +
-                ", id_cliente=" + id_cliente +
-                ", id_envio=" + id_envio +
+                ", id_cliente=" + idCliente +
+                ", id_envio=" + idEnvio +
                 ", fechaEncuesta=" + fechaEncuesta +
                 ", calificacion=" + calificacion +
                 ", comentario_satisfaccion='" + comentario_satisfaccion + '\'' +

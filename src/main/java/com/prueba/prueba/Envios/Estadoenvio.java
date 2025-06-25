@@ -7,8 +7,8 @@ import jakarta.persistence.*;
 public class Estadoenvio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_estado", nullable = false)
-    private Integer id_estado;
+    @Column(name = "idEstado", nullable = false)
+    private Integer idEstado;
 
     private String nombre;
 
@@ -21,11 +21,11 @@ public class Estadoenvio {
     }
 
     public Integer getId_estado() {
-        return id_estado;
+        return idEstado;
     }
 
     public void setId_estado(Integer id_estado) {
-        this.id_estado = id_estado;
+        this.idEstado = id_estado;
     }
 
     //TODO [Reverse Engineering] generate columns from DB

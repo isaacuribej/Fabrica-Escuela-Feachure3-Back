@@ -9,7 +9,7 @@ public class Agentes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_agente;
+    private Integer idAgente;
 
     private String nombreUsuario;
 
@@ -73,17 +73,17 @@ public class Agentes {
     }
 
     public Integer getId_agente() {
-        return id_agente;
+        return idAgente;
     }
 
-    public void setId_agente(Integer id_agente) {
-        this.id_agente = id_agente;
+    public void setId_agente(Integer idAgente) {
+        this.idAgente = idAgente;
     }
 
     @Override
     public String toString() {
         return "Agentes{" +
-                "id_agente=" + id_agente +
+                "id_agente=" + idAgente +
                 ", nombreUsuario='" + nombreUsuario + '\'' +
                 ", contrasenaHash='" + contrasenaHash + '\'' +
                 ", direccion='" + direccion + '\'' +
