@@ -1,11 +1,11 @@
-package com.prueba.prueba.Envio;
+package com.prueba.prueba.envio;
 
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import com.prueba.prueba.Cliente.Cliente;
+import com.prueba.prueba.cliente.Cliente;
 
 @Entity
 public class Envio {

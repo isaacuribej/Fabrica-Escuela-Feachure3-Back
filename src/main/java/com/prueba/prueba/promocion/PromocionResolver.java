@@ -1,4 +1,4 @@
-package com.prueba.prueba.Promocion;
+package com.prueba.prueba.promocion;
 
 
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -6,8 +6,8 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
-import com.prueba.prueba.Cliente.Cliente;
-import com.prueba.prueba.Cliente.ClienteRepositorio;
+import com.prueba.prueba.cliente.Cliente;
+import com.prueba.prueba.cliente.ClienteRepositorio;
 
 import java.util.List;
 

@@ -1,14 +1,16 @@
-package com.prueba.prueba.Cliente;
+package com.prueba.prueba.cliente;
 
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+
+import com.prueba.prueba.utilities.PasswordEncryptor;
+
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 
 import java.util.List;
 import java.util.regex.Pattern;
-import com.prueba.prueba.Utilities.PasswordEncryptor;
 
 @Controller
 
@@ -43,7 +45,7 @@ public class ClienteResolver {
     @QueryMapping
     public Cliente buscaCliente(@Argument Integer idCliente) {
         return clientesRepositorio.findById(idCliente)
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
 
     public record ClientesInput(
@@ -187,7 +189,7 @@ public class ClienteResolver {
     }
 
     @MutationMapping(name = "LoginCliente")
-    public Boolean LoginCliente(@Argument String correoElectronico, @Argument String contrasenaHash) {
+    public Boolean loginCliente(@Argument String correoElectronico, @Argument String contrasenaHash) {
         return validarLogin(correoElectronico, contrasenaHash);
     }
 

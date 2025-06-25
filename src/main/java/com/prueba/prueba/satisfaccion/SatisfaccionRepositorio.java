@@ -1,4 +1,4 @@
-package com.prueba.prueba.Satisfaccion;
+package com.prueba.prueba.satisfaccion;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

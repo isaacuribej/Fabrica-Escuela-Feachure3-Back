@@ -1,13 +1,14 @@
-package com.prueba.prueba.Cliente;
+package com.prueba.prueba.envio;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tipodocumento")
-public class Tipodocumento {
+@Table(name = "estadoenvios")
+public class Estadoenvio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idTipoDocumento;
+    @Column(name = "idEstado", nullable = false)
+    private Integer idEstado;
 
     private String nombre;
 
@@ -19,12 +20,12 @@ public class Tipodocumento {
         this.nombre = nombre;
     }
 
-    public Integer getIdTipoDocumento() {
-        return idTipoDocumento;
+    public Integer getIdEstado() {
+        return idEstado;
     }
 
-    public void setIdTipoDocumento(Integer idTipoDocumento) {
-        this.idTipoDocumento = idTipoDocumento;
+    public void setIdEstado(Integer idEstado) {
+        this.idEstado = idEstado;
     }
 
     //TODO [Reverse Engineering] generate columns from DB

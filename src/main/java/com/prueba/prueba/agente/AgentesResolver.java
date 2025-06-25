@@ -1,4 +1,4 @@
-package com.prueba.prueba.Agente;
+package com.prueba.prueba.agente;
 
 
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -6,10 +6,9 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import com.prueba.prueba.utilities.PasswordEncryptor;
+
 import java.util.List;
-
-
-import com.prueba.prueba.Utilities.PasswordEncryptor;
 
 
 
@@ -29,8 +28,8 @@ public class AgentesResolver {
     }
 
     @QueryMapping
-    public Agente buscaAgente(@Argument Integer id_agente) {
-        return  agentesRepositorio.findById(id_agente).orElseThrow(() -> new RuntimeException("Agente no encontrado"));
+    public Agente buscaAgente(@Argument Integer idAgente) {
+        return  agentesRepositorio.findById(idAgente).orElseThrow(() -> new RuntimeException("Agente no encontrado"));
     }
 
     public boolean validarLogin(String nombreUsuario, String contrasenaHash) {
@@ -44,7 +43,7 @@ public class AgentesResolver {
     }
 
     @MutationMapping(name = "LoginAgente")
-    public Boolean LoginAgente(@Argument String nombreUsuario, @Argument String contrasenaHash) {
+    public Boolean loginAgente(@Argument String nombreUsuario, @Argument String contrasenaHash) {
         return validarLogin(nombreUsuario, contrasenaHash);
     }
 

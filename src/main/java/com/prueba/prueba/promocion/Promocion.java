@@ -1,11 +1,11 @@
-package com.prueba.prueba.Promocion;
+package com.prueba.prueba.promocion;
 
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.prueba.prueba.Cliente.Cliente;
+import com.prueba.prueba.cliente.Cliente;
 
 import java.time.LocalDate;
 
@@ -85,8 +85,8 @@ public class Promocion {
         return idPromocion;
     }
 
-    public void setIdPromocion(Integer id_promocion) {
-        this.idPromocion = id_promocion;
+    public void setIdPromocion(Integer idPromocion) {
+        this.idPromocion = idPromocion;
     }
 
     @Override

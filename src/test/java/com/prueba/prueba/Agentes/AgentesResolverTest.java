@@ -6,9 +6,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.prueba.prueba.Agente.Agente;
-import com.prueba.prueba.Agente.AgentesRepositorio;
-import com.prueba.prueba.Agente.AgentesResolver;
+import com.prueba.prueba.agente.Agente;
+import com.prueba.prueba.agente.AgentesRepositorio;
+import com.prueba.prueba.agente.AgentesResolver;
 
 import java.util.Arrays;
 import java.util.List;

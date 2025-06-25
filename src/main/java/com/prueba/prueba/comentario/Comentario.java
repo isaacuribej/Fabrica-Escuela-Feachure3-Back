@@ -1,11 +1,11 @@
-package com.prueba.prueba.Comentario;
+package com.prueba.prueba.comentario;
 
 
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-import com.prueba.prueba.Envio.Envio;
+import com.prueba.prueba.envio.Envio;
 
 @Entity
 public class Comentario {

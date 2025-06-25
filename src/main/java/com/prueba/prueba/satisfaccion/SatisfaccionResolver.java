@@ -1,10 +1,10 @@
-package com.prueba.prueba.Satisfaccion;
+package com.prueba.prueba.satisfaccion;
 
 
-import com.prueba.prueba.Cliente.Cliente;
-import com.prueba.prueba.Cliente.ClienteRepositorio;
-import com.prueba.prueba.Envio.Envio;
-import com.prueba.prueba.Envio.EnvioRepositorio;
+import com.prueba.prueba.cliente.Cliente;
+import com.prueba.prueba.cliente.ClienteRepositorio;
+import com.prueba.prueba.envio.Envio;
+import com.prueba.prueba.envio.EnvioRepositorio;
 
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;

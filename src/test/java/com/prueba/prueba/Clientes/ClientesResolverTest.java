@@ -1,11 +1,12 @@
 package com.prueba.prueba.Clientes;
 
-import com.prueba.prueba.Cliente.Cliente;
-import com.prueba.prueba.Cliente.ClienteRepositorio;
-import com.prueba.prueba.Cliente.ClienteResolver;
-import com.prueba.prueba.Cliente.Tipodocumento;
-import com.prueba.prueba.Cliente.TipodocumentoRepositorio;
-import com.prueba.prueba.Utilities.PasswordEncryptor;
+import com.prueba.prueba.cliente.Cliente;
+import com.prueba.prueba.cliente.ClienteRepositorio;
+import com.prueba.prueba.cliente.ClienteResolver;
+import com.prueba.prueba.cliente.Tipodocumento;
+import com.prueba.prueba.cliente.TipodocumentoRepositorio;
+import com.prueba.prueba.utilities.PasswordEncryptor;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

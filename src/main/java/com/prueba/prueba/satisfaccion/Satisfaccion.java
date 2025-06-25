@@ -1,8 +1,8 @@
-package com.prueba.prueba.Satisfaccion;
+package com.prueba.prueba.satisfaccion;
 
 
-import com.prueba.prueba.Cliente.Cliente;
-import com.prueba.prueba.Envio.Envio;
+import com.prueba.prueba.cliente.Cliente;
+import com.prueba.prueba.envio.Envio;
 
 import jakarta.persistence.*;
 
@@ -13,7 +13,7 @@ public class Satisfaccion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_satisfaccion;
+    private Integer idSatisfaccion;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idCliente", nullable = false)
@@ -41,11 +41,11 @@ public class Satisfaccion {
     public Satisfaccion() {
     }
 
-    public String getComentario_satisfaccion() {
+    public String getComentarioSatisfaccion() {
         return comentarioSatisfaccion;
     }
 
-    public void setComentario_satisfaccion(String comentarioSatisfaccion) {
+    public void setComentarioSatisfaccion(String comentarioSatisfaccion) {
         this.comentarioSatisfaccion = comentarioSatisfaccion;
     }
 
@@ -82,17 +82,17 @@ public class Satisfaccion {
     }
 
     public Integer getIdSatisfaccion() {
-        return id_satisfaccion;
+        return idSatisfaccion;
     }
 
     public void setIdSatisfaccion(Integer idSatisfaccion) {
-        this.id_satisfaccion = idSatisfaccion;
+        this.idSatisfaccion = idSatisfaccion;
     }
 
     @Override
     public String toString() {
         return "Satisfaccion{" +
-                "idSatisfaccion=" + id_satisfaccion +
+                "idSatisfaccion=" + idSatisfaccion +
                 ", idCliente=" + idCliente +
                 ", idEnvio=" + idEnvio +
                 ", fechaEncuesta=" + fechaEncuesta +

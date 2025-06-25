@@ -1,4 +1,4 @@
-package com.prueba.prueba.Utilities;
+package com.prueba.prueba.utilities;
 
 import org.springframework.stereotype.Component;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -1,4 +1,4 @@
-package com.prueba.prueba.Utilities;
+package com.prueba.prueba.utilities;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

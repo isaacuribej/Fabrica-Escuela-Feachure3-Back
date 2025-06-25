@@ -1,4 +1,4 @@
-package com.prueba.prueba.Agente;
+package com.prueba.prueba.agente;
 
 
 import jakarta.persistence.*;

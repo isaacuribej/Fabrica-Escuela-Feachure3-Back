@@ -1,4 +1,4 @@
-package com.prueba.prueba.Comentario;
+package com.prueba.prueba.comentario;
 
 
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -7,8 +7,8 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
-import com.prueba.prueba.Envio.Envio;
-import com.prueba.prueba.Envio.EnvioRepositorio;
+import com.prueba.prueba.envio.Envio;
+import com.prueba.prueba.envio.EnvioRepositorio;
 
 import java.time.LocalDate;
 import java.util.List;
