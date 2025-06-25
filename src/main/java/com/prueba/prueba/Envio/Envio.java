@@ -1,13 +1,14 @@
-package com.prueba.prueba.Envios;
+package com.prueba.prueba.Envio;
 
-import com.prueba.prueba.Clientes.Clientes;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.prueba.prueba.Cliente.Cliente;
+
 @Entity
-public class Envios {
+public class Envio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +16,7 @@ public class Envios {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idCliente", nullable = false)
-    private Clientes idCliente;
+    private Cliente idCliente;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idEstado", nullable = false)
@@ -29,7 +30,7 @@ public class Envios {
 
     private BigDecimal precio;    
     
-    public Envios(Estadoenvio idEstado, String direccionEnvio, BigDecimal precio, LocalDate fechaCompra, String numeroGuia, Clientes idCliente) {
+    public Envio(Estadoenvio idEstado, String direccionEnvio, BigDecimal precio, LocalDate fechaCompra, String numeroGuia, Cliente idCliente) {
         this.idEstado = idEstado;
         this.direccionEnvio = direccionEnvio;
         this.precio = precio;
@@ -38,30 +39,30 @@ public class Envios {
         this.idCliente = idCliente;
     }
 
-    public Envios() {
+    public Envio() {
     }
 
-    public Integer getId_envio() {
+    public Integer getIdEnvio() {
         return idEnvio;
     }
 
-    public void setId_envio(Integer idEnvio) {
+    public void setIdEnvio(Integer idEnvio) {
         this.idEnvio = idEnvio;
     }
 
-    public Clientes getId_cliente() {
+    public Cliente getIdCliente() {
         return idCliente;
     }
 
-    public void setId_cliente(Clientes idCliente) {
+    public void setIdCliente(Cliente idCliente) {
         this.idCliente = idCliente;
     }
 
-    public Estadoenvio getId_estado() {
+    public Estadoenvio getIdEstado() {
         return idEstado;
     }
 
-    public void setId_estado(Estadoenvio idEstado) {
+    public void setIdEstado(Estadoenvio idEstado) {
         this.idEstado = idEstado;
     }
 

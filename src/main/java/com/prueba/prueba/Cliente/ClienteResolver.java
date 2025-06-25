@@ -1,4 +1,4 @@
-package com.prueba.prueba.Clientes;
+package com.prueba.prueba.Cliente;
 
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -12,8 +12,8 @@ import com.prueba.prueba.Utilities.PasswordEncryptor;
 
 @Controller
 
-public class ClientesResolver {
-    private final ClientesRepositorio clientesRepositorio;
+public class ClienteResolver {
+    private final ClienteRepositorio clientesRepositorio;
     private final PasswordEncryptor passwordEncryptor;
 
     private final TipodocumentoRepositorio tipodocumentoRepositorio;
@@ -22,7 +22,7 @@ public class ClientesResolver {
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
             "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
 
-    public ClientesResolver(ClientesRepositorio clientesRepositorio, TipodocumentoRepositorio tipodocumentoRepositorio,
+    public ClienteResolver(ClienteRepositorio clientesRepositorio, TipodocumentoRepositorio tipodocumentoRepositorio,
             PasswordEncryptor passwordEncryptor) {
         this.clientesRepositorio = clientesRepositorio;
         this.tipodocumentoRepositorio = tipodocumentoRepositorio;
@@ -31,18 +31,18 @@ public class ClientesResolver {
     }
 
     @SchemaMapping(typeName = "Clientes", field = "idTipoDocumento")
-    public Tipodocumento resolverTipoDocumento(Clientes cliente) {
+    public Tipodocumento resolverTipoDocumento(Cliente cliente) {
         return cliente.getIdTipoDocumento();
     }
 
     @QueryMapping
-    public List<Clientes> listaClientes() {
+    public List<Cliente> listaClientes() {
         return clientesRepositorio.findAll();
     }
 
     @QueryMapping
-    public Clientes buscaCliente(@Argument Integer id_cliente) {
-        return clientesRepositorio.findById(id_cliente)
+    public Cliente buscaCliente(@Argument Integer idCliente) {
+        return clientesRepositorio.findById(idCliente)
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
     }
 
@@ -82,14 +82,14 @@ public class ClientesResolver {
     }
 
     @MutationMapping(name = "insertarCliente")
-    public Clientes insertarCliente(@Argument ClientesInput clientesInput) {
+    public Cliente insertarCliente(@Argument ClientesInput clientesInput) {
         // Validar email
         validarEmail(clientesInput.correoElectronico());
 
         Tipodocumento tipoDoc = tipodocumentoRepositorio.findById(clientesInput.idTipoDocumento())
                 .orElseThrow(() -> new RuntimeException("Tipo de documento no encontrado"));
 
-        Clientes cliente = new Clientes();
+        Cliente cliente = new Cliente();
         cliente.setIdTipoDocumento(tipoDoc);
         cliente.setNombre(limpiarTexto(clientesInput.nombre()));
         cliente.setApellido(limpiarTexto(clientesInput.apellido()));
@@ -103,17 +103,17 @@ public class ClientesResolver {
     }
 
     @MutationMapping
-    public Boolean deleteCliente(@Argument Integer id_cliente) {
-        clientesRepositorio.deleteById(id_cliente);
+    public Boolean deleteCliente(@Argument Integer idCliente) {
+        clientesRepositorio.deleteById(idCliente);
         return true;
     }
 
     @MutationMapping
-    public Clientes updateCliente(@Argument Integer id_cliente, @Argument ClientesInput clientesInput) {
+    public Cliente updateCliente(@Argument Integer idCliente, @Argument ClientesInput clientesInput) {
         // Validar email
         validarEmail(clientesInput.correoElectronico());
 
-        Clientes cliente = clientesRepositorio.findById(id_cliente)
+        Cliente cliente = clientesRepositorio.findById(idCliente)
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
         Tipodocumento tipoDoc = tipodocumentoRepositorio.findById(clientesInput.idTipoDocumento())
@@ -133,9 +133,9 @@ public class ClientesResolver {
 
     // Nuevo método para actualizar perfil sin cambiar contraseña
     @MutationMapping
-    public Clientes updateClienteProfile(@Argument Integer id_cliente,
+    public Cliente updateClienteProfile(@Argument Integer idCliente,
             @Argument ClientesUpdateInput clientesUpdateInput) {
-        Clientes cliente = clientesRepositorio.findById(id_cliente)
+        Cliente cliente = clientesRepositorio.findById(idCliente)
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
         // Actualizar solo los campos proporcionados (null-safe)
@@ -176,7 +176,7 @@ public class ClientesResolver {
     }
 
     public boolean validarLogin(String correoElectronico, String contrasenaHash) {
-        Clientes clientes = clientesRepositorio.findByCorreoElectronico(correoElectronico).orElse(null);
+        Cliente clientes = clientesRepositorio.findByCorreoElectronico(correoElectronico).orElse(null);
         if (clientes == null)
             return false;
         try {

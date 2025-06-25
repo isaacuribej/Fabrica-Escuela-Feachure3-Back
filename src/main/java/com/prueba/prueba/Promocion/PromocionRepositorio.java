@@ -1,4 +1,4 @@
-package com.prueba.prueba.Promociones;
+package com.prueba.prueba.Promocion;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,5 +8,5 @@ import org.springframework.graphql.data.GraphQlRepository;
 
 
 @GraphQlRepository
-public interface PromocionRepositorio extends JpaRepository<Promociones, Integer>, QueryByExampleExecutor<Promociones> {
+public interface PromocionRepositorio extends JpaRepository<Promocion, Integer>, QueryByExampleExecutor<Promocion> {
 }

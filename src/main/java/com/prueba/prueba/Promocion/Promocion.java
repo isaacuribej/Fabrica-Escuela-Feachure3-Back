@@ -1,15 +1,16 @@
-package com.prueba.prueba.Promociones;
+package com.prueba.prueba.Promocion;
 
 
-import com.prueba.prueba.Clientes.Clientes;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.prueba.prueba.Cliente.Cliente;
+
 import java.time.LocalDate;
 
 @Entity
-public class Promociones {
+public class Promocion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +19,7 @@ public class Promociones {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "idCliente", nullable = false)
-    private Clientes id_cliente;
+    private Cliente idCliente;
 
     @Column(name = "titulo", nullable = false, length = 100)
     private String titulo;
@@ -29,15 +30,15 @@ public class Promociones {
 
     private LocalDate fechaFin;
 
-    public Promociones(LocalDate fechaFin, LocalDate fechaInicio, String descripcion, String titulo, Clientes idCliente) {
+    public Promocion(LocalDate fechaFin, LocalDate fechaInicio, String descripcion, String titulo, Cliente idCliente) {
         this.fechaFin = fechaFin;
         this.fechaInicio = fechaInicio;
         this.descripcion = descripcion;
         this.titulo = titulo;
-        this.id_cliente = idCliente;
+        this.idCliente = idCliente;
     }
 
-    public Promociones() {
+    public Promocion() {
     }
 
     public LocalDate getFechaFin() {
@@ -72,27 +73,27 @@ public class Promociones {
         this.titulo = titulo;
     }
 
-    public Clientes getId_cliente() {
-        return id_cliente;
+    public Cliente getIdCliente() {
+        return idCliente;
     }
 
-    public void setId_cliente(Clientes id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setIdCliente(Cliente idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public Integer getId_promocion() {
+    public Integer getIdPromocion() {
         return idPromocion;
     }
 
-    public void setId_promocion(Integer id_promocion) {
+    public void setIdPromocion(Integer id_promocion) {
         this.idPromocion = id_promocion;
     }
 
     @Override
     public String toString() {
         return "Promociones{" +
-                "id_promocion=" + idPromocion +
-                ", id_cliente=" + id_cliente +
+                "idPromocion=" + idPromocion +
+                ", idCliente=" + idCliente +
                 ", titulo='" + titulo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", fechaInicio=" + fechaInicio +

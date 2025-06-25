@@ -1,24 +1,25 @@
-package com.prueba.prueba.Comentarios;
+package com.prueba.prueba.Comentario;
 
 
-import com.prueba.prueba.Envios.Envios;
-import com.prueba.prueba.Envios.EnviosRepositorio;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
+import com.prueba.prueba.Envio.Envio;
+import com.prueba.prueba.Envio.EnvioRepositorio;
+
 import java.time.LocalDate;
 import java.util.List;
 
 
 @Controller
-public class ComentariosResolver {
-    private final ComentariosRepositorio comentariosRepositorio;
-    private final EnviosRepositorio enviosRepositorio;
+public class ComentarioResolver {
+    private final ComentarioRepositorio comentariosRepositorio;
+    private final EnvioRepositorio enviosRepositorio;
 
-    public ComentariosResolver(ComentariosRepositorio comentariosRepositorio, EnviosRepositorio enviosRepositorio) {
+    public ComentarioResolver(ComentarioRepositorio comentariosRepositorio, EnvioRepositorio enviosRepositorio) {
         this.comentariosRepositorio = comentariosRepositorio;
         this.enviosRepositorio = enviosRepositorio;
     }
@@ -27,30 +28,30 @@ public class ComentariosResolver {
 
 
     @SchemaMapping
-    public Envios resolverEnvios(Comentarios comentarios) {
-        return comentarios.getId_envio();
+    public Envio resolverEnvios(Comentario comentarios) {
+        return comentarios.getIdEnvio();
     }
 
     @QueryMapping
-    public List<Comentarios> comentariosporEnvio(@Argument Integer id_envio) {
+    public List<Comentario> comentariosporEnvio(@Argument Integer id_envio) {
         // Trae todos los comentarios
-        List<Comentarios> todos = comentariosRepositorio.findAll();
+        List<Comentario> todos = comentariosRepositorio.findAll();
 
         // Filtra manualmente los que tengan el id_envio solicitado
         return todos.stream()
-                .filter(c -> c.getId_envio().getId_envio().equals(id_envio))
+                .filter(c -> c.getIdEnvio().getIdEnvio().equals(id_envio))
                 .toList();
     }
 
     @MutationMapping
-    public Comentarios agregarComentario(@Argument Integer id_envio, @Argument String contenido) {
+    public Comentario agregarComentario(@Argument Integer idEnvio, @Argument String contenido) {
         // Busca el envío por id
-        Envios envio = enviosRepositorio.findById(id_envio)
+        Envio envio = enviosRepositorio.findById(idEnvio)
                 .orElseThrow(() -> new RuntimeException("Envio no encontrado"));
 
         // Crea el nuevo comentario
-        Comentarios nuevoComentario = new Comentarios();
-        nuevoComentario.setId_envio(envio);
+        Comentario nuevoComentario = new Comentario();
+        nuevoComentario.setIdEnvio(envio);
         nuevoComentario.setContenido(contenido);
         nuevoComentario.setFechaComentario(LocalDate.now());
 

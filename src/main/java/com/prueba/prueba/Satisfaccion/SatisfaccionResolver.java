@@ -1,10 +1,11 @@
 package com.prueba.prueba.Satisfaccion;
 
 
-import com.prueba.prueba.Clientes.Clientes;
-import com.prueba.prueba.Clientes.ClientesRepositorio;
-import com.prueba.prueba.Envios.Envios;
-import com.prueba.prueba.Envios.EnviosRepositorio;
+import com.prueba.prueba.Cliente.Cliente;
+import com.prueba.prueba.Cliente.ClienteRepositorio;
+import com.prueba.prueba.Envio.Envio;
+import com.prueba.prueba.Envio.EnvioRepositorio;
+
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -16,10 +17,10 @@ import java.util.List;
 @Controller
 public class SatisfaccionResolver {
     private final SatisfaccionRepositorio satisfaccionRepositorio;
-    private final ClientesRepositorio clientesRepositorio;
-    private final EnviosRepositorio enviosRepositorio;
+    private final ClienteRepositorio clientesRepositorio;
+    private final EnvioRepositorio enviosRepositorio;
 
-    public SatisfaccionResolver(SatisfaccionRepositorio satisfaccionRepositorio, ClientesRepositorio clientesRepositorio, EnviosRepositorio enviosRepositorio) {
+    public SatisfaccionResolver(SatisfaccionRepositorio satisfaccionRepositorio, ClienteRepositorio clientesRepositorio, EnvioRepositorio enviosRepositorio) {
         this.satisfaccionRepositorio = satisfaccionRepositorio;
         this.clientesRepositorio = clientesRepositorio;
         this.enviosRepositorio = enviosRepositorio;
@@ -27,12 +28,12 @@ public class SatisfaccionResolver {
 
 
     @SchemaMapping
-    public Clientes resolverCliente(Satisfaccion satisfaccion) {
-        return satisfaccion.getId_cliente();
+    public Cliente resolverCliente(Satisfaccion satisfaccion) {
+        return satisfaccion.getIdCliente();
     }
     @SchemaMapping
-    public Envios resolverEnvio(Satisfaccion satisfaccion) {
-        return satisfaccion.getId_envio();
+    public Envio resolverEnvio(Satisfaccion satisfaccion) {
+        return satisfaccion.getIdEnvio();
     }
 
     //Lista todas las satisfacciones

@@ -1,5 +1,10 @@
 package com.prueba.prueba.Clientes;
 
+import com.prueba.prueba.Cliente.Cliente;
+import com.prueba.prueba.Cliente.ClienteRepositorio;
+import com.prueba.prueba.Cliente.ClienteResolver;
+import com.prueba.prueba.Cliente.Tipodocumento;
+import com.prueba.prueba.Cliente.TipodocumentoRepositorio;
 import com.prueba.prueba.Utilities.PasswordEncryptor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +24,7 @@ import static org.mockito.Mockito.*;
 class ClientesResolverTest {
 
     @Mock
-    private ClientesRepositorio clientesRepositorio;
+    private ClienteRepositorio clientesRepositorio;
 
     @Mock
     private TipodocumentoRepositorio tipodocumentoRepositorio;
@@ -28,10 +33,10 @@ class ClientesResolverTest {
     private PasswordEncryptor passwordEncryptor;
 
     @InjectMocks
-    private ClientesResolver clientesResolver;
+    private ClienteResolver clientesResolver;
 
     private Tipodocumento tipoDocumento;
-    private Clientes cliente;
+    private Cliente cliente;
 
     @BeforeEach
     void setUp() {
@@ -40,8 +45,8 @@ class ClientesResolverTest {
         tipoDocumento.setIdTipoDocumento(1);
         tipoDocumento.setNombre("Cédula");
 
-        cliente = new Clientes();
-        cliente.setId_cliente(1);
+        cliente = new Cliente();
+        cliente.setIdCliente(1);
         cliente.setIdTipoDocumento(tipoDocumento);
         cliente.setNombre("Juan");
         cliente.setApellido("Pérez");
@@ -56,7 +61,7 @@ class ClientesResolverTest {
     void listaClientes_debeRetornarListaDeClientes() {
         when(clientesRepositorio.findAll()).thenReturn(Arrays.asList(cliente));
 
-        List<Clientes> resultado = clientesResolver.listaClientes();
+        List<Cliente> resultado = clientesResolver.listaClientes();
 
         assertEquals(1, resultado.size());
         assertEquals("Juan", resultado.get(0).getNombre());
@@ -66,7 +71,7 @@ class ClientesResolverTest {
     void buscaCliente_conIdExistente_debeRetornarCliente() {
         when(clientesRepositorio.findById(1)).thenReturn(Optional.of(cliente));
 
-        Clientes resultado = clientesResolver.buscaCliente(1);
+        Cliente resultado = clientesResolver.buscaCliente(1);
 
         assertEquals("Juan", resultado.getNombre());
     }
@@ -80,22 +85,22 @@ class ClientesResolverTest {
 
     @Test
     void insertarCliente_conDatosValidos_debeInsertarCliente() {
-        ClientesResolver.ClientesInput input = new ClientesResolver.ClientesInput(
+        ClienteResolver.ClientesInput input = new ClienteResolver.ClientesInput(
                 1, "Maria", "Gomez", "987654321", "maria.gomez@example.com", "password", "Av. 456", "555-5678");
 
         when(tipodocumentoRepositorio.findById(1)).thenReturn(Optional.of(tipoDocumento));
         when(passwordEncryptor.encrypt("password")).thenReturn("hashedPassword");
-        when(clientesRepositorio.save(any(Clientes.class))).thenReturn(cliente);
+        when(clientesRepositorio.save(any(Cliente.class))).thenReturn(cliente);
 
-        Clientes resultado = clientesResolver.insertarCliente(input);
+        Cliente resultado = clientesResolver.insertarCliente(input);
 
         assertEquals("Juan", resultado.getNombre());
-        verify(clientesRepositorio).save(any(Clientes.class));
+        verify(clientesRepositorio).save(any(Cliente.class));
     }
 
     @Test
     void insertarCliente_conTipoDocumentoNoExistente_debeLanzarExcepcion() {
-        ClientesResolver.ClientesInput input = new ClientesResolver.ClientesInput(
+        ClienteResolver.ClientesInput input = new ClienteResolver.ClientesInput(
                 99, "Maria", "Gomez", "987654321", "maria.gomez@example.com", "password", "Av. 456", "555-5678");
 
         when(tipodocumentoRepositorio.findById(anyInt())).thenReturn(Optional.empty());
@@ -105,7 +110,7 @@ class ClientesResolverTest {
 
     @Test
     void insertarCliente_conEmailInvalido_debeLanzarExcepcion() {
-        ClientesResolver.ClientesInput input = new ClientesResolver.ClientesInput(
+        ClienteResolver.ClientesInput input = new ClienteResolver.ClientesInput(
                 1, "Maria", "Gomez", "987654321", "emailinvalido", "password", "Av. 456", "555-5678");
 
         assertThrows(RuntimeException.class, () -> clientesResolver.insertarCliente(input));
@@ -123,23 +128,23 @@ class ClientesResolverTest {
 
     @Test
     void updateCliente_conDatosValidos_debeActualizarCliente() {
-        ClientesResolver.ClientesInput input = new ClientesResolver.ClientesInput(
+        ClienteResolver.ClientesInput input = new ClienteResolver.ClientesInput(
                 1, "Maria", "Gomez", "987654321", "maria.gomez@example.com", "newpassword", "Av. 456", "555-5678");
 
         when(clientesRepositorio.findById(1)).thenReturn(Optional.of(cliente));
         when(tipodocumentoRepositorio.findById(1)).thenReturn(Optional.of(tipoDocumento));
         when(passwordEncryptor.encrypt("newpassword")).thenReturn("newHashedPassword");
-        when(clientesRepositorio.save(any(Clientes.class))).thenReturn(cliente);
+        when(clientesRepositorio.save(any(Cliente.class))).thenReturn(cliente);
 
-        Clientes resultado = clientesResolver.updateCliente(1, input);
+        Cliente resultado = clientesResolver.updateCliente(1, input);
 
         assertEquals("Juan", resultado.getNombre());
-        verify(clientesRepositorio).save(any(Clientes.class));
+        verify(clientesRepositorio).save(any(Cliente.class));
     }
 
     @Test
     void updateCliente_conIdNoExistente_debeLanzarExcepcion() {
-        ClientesResolver.ClientesInput input = new ClientesResolver.ClientesInput(
+        ClienteResolver.ClientesInput input = new ClienteResolver.ClientesInput(
                 1, "Maria", "Gomez", "987654321", "maria.gomez@example.com", "newpassword", "Av. 456", "555-5678");
 
         when(clientesRepositorio.findById(anyInt())).thenReturn(Optional.empty());
@@ -149,22 +154,22 @@ class ClientesResolverTest {
 
     @Test
     void updateClienteProfile_conDatosValidos_debeActualizarPerfil() {
-        ClientesResolver.ClientesUpdateInput input = new ClientesResolver.ClientesUpdateInput(
+        ClienteResolver.ClientesUpdateInput input = new ClienteResolver.ClientesUpdateInput(
                 1, "Ana", "Lopez", "987654321", "ana.lopez@example.com", "Av. 789", "555-9012");
 
         when(clientesRepositorio.findById(1)).thenReturn(Optional.of(cliente));
         when(tipodocumentoRepositorio.findById(1)).thenReturn(Optional.of(tipoDocumento));
-        when(clientesRepositorio.save(any(Clientes.class))).thenReturn(cliente);
+        when(clientesRepositorio.save(any(Cliente.class))).thenReturn(cliente);
 
-        Clientes resultado = clientesResolver.updateClienteProfile(1, input);
+        Cliente resultado = clientesResolver.updateClienteProfile(1, input);
 
         assertEquals("Juan", resultado.getNombre()); // El nombre no se actualiza en este test
-        verify(clientesRepositorio).save(any(Clientes.class));
+        verify(clientesRepositorio).save(any(Cliente.class));
     }
 
     @Test
     void updateClienteProfile_conIdNoExistente_debeLanzarExcepcion() {
-        ClientesResolver.ClientesUpdateInput input = new ClientesResolver.ClientesUpdateInput(
+        ClienteResolver.ClientesUpdateInput input = new ClienteResolver.ClientesUpdateInput(
                 1, "Ana", "Lopez", "987654321", "ana.lopez@example.com", "Av. 789", "555-9012");
 
         when(clientesRepositorio.findById(anyInt())).thenReturn(Optional.empty());

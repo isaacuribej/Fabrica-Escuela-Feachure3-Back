@@ -1,4 +1,4 @@
-package com.prueba.prueba.Agentes;
+package com.prueba.prueba.Agente;
 
 
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -24,17 +24,17 @@ public class AgentesResolver {
     }
 
     @QueryMapping
-    public List<Agentes> listaAgentes() {
+    public List<Agente> listaAgentes() {
         return  agentesRepositorio.findAll();
     }
 
     @QueryMapping
-    public Agentes buscaAgente(@Argument Integer id_agente) {
+    public Agente buscaAgente(@Argument Integer id_agente) {
         return  agentesRepositorio.findById(id_agente).orElseThrow(() -> new RuntimeException("Agente no encontrado"));
     }
 
     public boolean validarLogin(String nombreUsuario, String contrasenaHash) {
-        Agentes agentes = agentesRepositorio.findByNombreUsuario(nombreUsuario).orElse(null);
+        Agente agentes = agentesRepositorio.findByNombreUsuario(nombreUsuario).orElse(null);
         if (agentes == null) return false;
         try {
             return passwordEncryptor.matches(contrasenaHash, agentes.getContrasenaHash());
@@ -59,8 +59,8 @@ public class AgentesResolver {
 
 
     @MutationMapping(name = "insertarAgente")
-    public Agentes insertarAgente(@Argument AgentesInput agentesInput) {
-        Agentes agentes = new Agentes();
+    public Agente insertarAgente(@Argument AgentesInput agentesInput) {
+        Agente agentes = new Agente();
         // Encriptar la contraseña antes de guardar
         agentes.setContrasenaHash(passwordEncryptor.encrypt(agentesInput.contrasenaHash()));
         agentes.setNombreUsuario(agentesInput.nombreUsuario());

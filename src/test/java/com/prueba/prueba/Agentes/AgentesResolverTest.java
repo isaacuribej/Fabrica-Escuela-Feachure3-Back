@@ -6,6 +6,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.prueba.prueba.Agente.Agente;
+import com.prueba.prueba.Agente.AgentesRepositorio;
+import com.prueba.prueba.Agente.AgentesResolver;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -28,19 +32,19 @@ class AgentesResolverTest {
 
     @Test
     void listaAgentes_ShouldReturnListOfAgents() {
-        Agentes agente1 = new Agentes();
-        agente1.setId_agente(1);
+        Agente agente1 = new Agente();
+        agente1.setIdAgente(1);
         agente1.setNombreUsuario("Agente 1");
 
-        Agentes agente2 = new Agentes();
-        agente2.setId_agente(2);
+        Agente agente2 = new Agente();
+        agente2.setIdAgente(2);
         agente2.setNombreUsuario("Agente 2");
 
-        List<Agentes> agentesList = Arrays.asList(agente1, agente2);
+        List<Agente> agentesList = Arrays.asList(agente1, agente2);
 
         when(agentesRepositorio.findAll()).thenReturn(agentesList);
 
-        List<Agentes> result = agentesResolver.listaAgentes();
+        List<Agente> result = agentesResolver.listaAgentes();
 
         assertEquals(2, result.size());
         assertEquals("Agente 1", result.get(0).getNombreUsuario());
@@ -50,13 +54,13 @@ class AgentesResolverTest {
 
     @Test
     void buscaAgente_WhenAgentFound_ShouldReturnAgent() {
-        Agentes agente = new Agentes();
-        agente.setId_agente(1);
+        Agente agente = new Agente();
+        agente.setIdAgente(1);
         agente.setNombreUsuario("Agente Test");
 
         when(agentesRepositorio.findById(1)).thenReturn(Optional.of(agente));
 
-        Agentes result = agentesResolver.buscaAgente(1);
+        Agente result = agentesResolver.buscaAgente(1);
 
         assertNotNull(result);
         assertEquals("Agente Test", result.getNombreUsuario());

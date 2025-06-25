@@ -1,4 +1,4 @@
-package com.prueba.prueba.Envios;
+package com.prueba.prueba.Envio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.graphql.data.GraphQlRepository;

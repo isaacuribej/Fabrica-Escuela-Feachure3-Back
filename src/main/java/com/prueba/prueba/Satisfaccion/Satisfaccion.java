@@ -1,8 +1,9 @@
 package com.prueba.prueba.Satisfaccion;
 
 
-import com.prueba.prueba.Clientes.Clientes;
-import com.prueba.prueba.Envios.Envios;
+import com.prueba.prueba.Cliente.Cliente;
+import com.prueba.prueba.Envio.Envio;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -16,36 +17,36 @@ public class Satisfaccion {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idCliente", nullable = false)
-    private Clientes idCliente;
+    private Cliente idCliente;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idEnvio", nullable = false)
-    private Envios idEnvio;
+    private Envio idEnvio;
 
     private LocalDate fechaEncuesta;
 
     private Integer calificacion;
 
-    private String comentario_satisfaccion;
+    private String comentarioSatisfaccion;
 
 
-    public Satisfaccion(Clientes idCliente, Envios idEnvio, LocalDate fechaEncuesta, Integer calificacion, String comentarioSatisfaccion) {
+    public Satisfaccion(Cliente idCliente, Envio idEnvio, LocalDate fechaEncuesta, Integer calificacion, String comentarioSatisfaccion) {
         this.idCliente = idCliente;
         this.idEnvio = idEnvio;
         this.fechaEncuesta = fechaEncuesta;
         this.calificacion = calificacion;
-        this.comentario_satisfaccion = comentarioSatisfaccion;
+        this.comentarioSatisfaccion = comentarioSatisfaccion;
     }
 
     public Satisfaccion() {
     }
 
     public String getComentario_satisfaccion() {
-        return comentario_satisfaccion;
+        return comentarioSatisfaccion;
     }
 
-    public void setComentario_satisfaccion(String comentario_satisfaccion) {
-        this.comentario_satisfaccion = comentario_satisfaccion;
+    public void setComentario_satisfaccion(String comentarioSatisfaccion) {
+        this.comentarioSatisfaccion = comentarioSatisfaccion;
     }
 
     public Integer getCalificacion() {
@@ -64,39 +65,39 @@ public class Satisfaccion {
         this.fechaEncuesta = fechaEncuesta;
     }
 
-    public Envios getId_envio() {
+    public Envio getIdEnvio() {
         return idEnvio;
     }
 
-    public void setId_envio(Envios id_envio) {
-        this.idEnvio = id_envio;
+    public void setIdEnvio(Envio idEnvio) {
+        this.idEnvio = idEnvio;
     }
 
-    public Clientes getId_cliente() {
+    public Cliente getIdCliente() {
         return idCliente;
     }
 
-    public void setId_cliente(Clientes id_cliente) {
-        this.idCliente = id_cliente;
+    public void setIdCliente(Cliente idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public Integer getId_satisfaccion() {
+    public Integer getIdSatisfaccion() {
         return id_satisfaccion;
     }
 
-    public void setId_satisfaccion(Integer id_satisfaccion) {
-        this.id_satisfaccion = id_satisfaccion;
+    public void setIdSatisfaccion(Integer idSatisfaccion) {
+        this.id_satisfaccion = idSatisfaccion;
     }
 
     @Override
     public String toString() {
         return "Satisfaccion{" +
-                "id_satisfaccion=" + id_satisfaccion +
-                ", id_cliente=" + idCliente +
-                ", id_envio=" + idEnvio +
+                "idSatisfaccion=" + id_satisfaccion +
+                ", idCliente=" + idCliente +
+                ", idEnvio=" + idEnvio +
                 ", fechaEncuesta=" + fechaEncuesta +
                 ", calificacion=" + calificacion +
-                ", comentario_satisfaccion='" + comentario_satisfaccion + '\'' +
+                ", comentarioSatisfaccion='" + comentarioSatisfaccion + '\'' +
                 '}';
     }
 }

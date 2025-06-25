@@ -1,32 +1,33 @@
-package com.prueba.prueba.Comentarios;
+package com.prueba.prueba.Comentario;
 
 
-import com.prueba.prueba.Envios.Envios;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+import com.prueba.prueba.Envio.Envio;
+
 @Entity
-public class Comentarios {
+public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idComentario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idEnvio", nullable = false)
-    private Envios idEnvio;
+    private Envio idEnvio;
 
     private LocalDate fechaComentario;
 
     private String contenido;
 
-    public Comentarios(Envios id_envio, LocalDate fechaComentario, String contenido) {
-        this.idEnvio = id_envio;
+    public Comentario(Envio idEnvio, LocalDate fechaComentario, String contenido) {
+        this.idEnvio = idEnvio;
         this.fechaComentario = fechaComentario;
         this.contenido = contenido;
     }
 
-    public Comentarios() {
+    public Comentario() {
     }
 
     public String getContenido() {
@@ -45,20 +46,20 @@ public class Comentarios {
         this.fechaComentario = fechaComentario;
     }
 
-    public Envios getId_envio() {
+    public Envio getIdEnvio() {
         return idEnvio;
     }
 
-    public void setId_envio(Envios id_envio) {
-        this.idEnvio = id_envio;
+    public void setIdEnvio(Envio idEnvio) {
+        this.idEnvio = idEnvio;
     }
 
-    public Integer getId_comentario() {
+    public Integer getIdComentario() {
         return idComentario;
     }
 
-    public void setId_comentario(Integer id_comentario) {
-        this.idComentario = id_comentario;
+    public void setIdComentario(Integer idComentario) {
+        this.idComentario = idComentario;
     }
 
     @Override

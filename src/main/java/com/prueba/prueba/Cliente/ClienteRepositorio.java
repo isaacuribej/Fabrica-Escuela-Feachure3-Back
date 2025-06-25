@@ -1,4 +1,4 @@
-package com.prueba.prueba.Clientes;
+package com.prueba.prueba.Cliente;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
@@ -8,7 +8,7 @@ import java.util.Optional;
 
 
 @GraphQlRepository
-public interface ClientesRepositorio extends JpaRepository<Clientes,Integer>, QueryByExampleExecutor <Clientes> {
-    Optional<Clientes> findByCorreoElectronico(String correoElectronico);
+public interface ClienteRepositorio extends JpaRepository<Cliente,Integer>, QueryByExampleExecutor <Cliente> {
+    Optional<Cliente> findByCorreoElectronico(String correoElectronico);
 
 }

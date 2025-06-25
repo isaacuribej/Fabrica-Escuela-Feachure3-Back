@@ -1,10 +1,10 @@
-package com.prueba.prueba.Agentes;
+package com.prueba.prueba.Agente;
 
 
 import jakarta.persistence.*;
 
 @Entity
-public class Agentes {
+public class Agente {
 
 
     @Id
@@ -21,7 +21,7 @@ public class Agentes {
 
     private String correoElectronico;
 
-    public Agentes(String nombreUsuario, String contrasenaHash, String direccion, String telefono, String correoElectronico) {
+    public Agente(String nombreUsuario, String contrasenaHash, String direccion, String telefono, String correoElectronico) {
         this.nombreUsuario = nombreUsuario;
         this.contrasenaHash = contrasenaHash;
         this.direccion = direccion;
@@ -29,7 +29,7 @@ public class Agentes {
         this.correoElectronico = correoElectronico;
     }
 
-    public Agentes() {
+    public Agente() {
     }
 
     public String getCorreoElectronico() {
@@ -72,11 +72,11 @@ public class Agentes {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public Integer getId_agente() {
+    public Integer getIdAgente() {
         return idAgente;
     }
 
-    public void setId_agente(Integer idAgente) {
+    public void setIdAgente(Integer idAgente) {
         this.idAgente = idAgente;
     }
 

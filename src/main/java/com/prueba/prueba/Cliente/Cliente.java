@@ -1,4 +1,4 @@
-package com.prueba.prueba.Clientes;
+package com.prueba.prueba.Cliente;
 
 import jakarta.persistence.*;
 
@@ -6,11 +6,11 @@ import java.time.LocalDate;
 
 
 @Entity
-public class Clientes {
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_cliente;
+    private Integer idCliente;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_tipo_documento", nullable = false)
@@ -31,7 +31,7 @@ public class Clientes {
     private String telefono;
 
 
-    public Clientes(Tipodocumento idTipoDocumento, String nombre, String numeroDocumento, String apellido, String direccion, String correoElectronico, String contrasenaHash, String telefono, LocalDate fechaCreacion) {
+    public Cliente(Tipodocumento idTipoDocumento, String nombre, String numeroDocumento, String apellido, String direccion, String correoElectronico, String contrasenaHash, String telefono, LocalDate fechaCreacion) {
         this.idTipoDocumento = idTipoDocumento;
         this.nombre = nombre;
         this.numeroDocumento = numeroDocumento;
@@ -42,7 +42,7 @@ public class Clientes {
         this.telefono = telefono;
     }
 
-    public Clientes() {
+    public Cliente() {
 
     }
 
@@ -111,18 +111,18 @@ public class Clientes {
         this.idTipoDocumento = idTipoDocumento;
     }
 
-    public Integer getId_cliente() {
-        return id_cliente;
+    public Integer getIdCliente() {
+        return idCliente;
     }
 
-    public void setId_cliente(Integer id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
     }
 
     @Override
     public String toString() {
         return "Clientes{" +
-                "id_cliente=" + id_cliente +
+                "id_cliente=" + idCliente +
                 ", idTipoDocumento=" + idTipoDocumento +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
